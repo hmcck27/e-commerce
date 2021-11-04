@@ -24,4 +24,12 @@ public class UserController {
 
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "signIn", method = RequestMethod.POST)
+    public ResponseEntity signIn(
+            @Valid UserSignInDto userSignInDto
+    ) {
+
+    }
+
 }
