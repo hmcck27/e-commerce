@@ -1,0 +1,26 @@
+jwt:
+  token:
+    secret_key_access: weYRLtXw4wgEB7JhLYYpSH4hjMDaYhn68WMJZmQT
+    secret_key_refresh: bzReKJjaRQ3CdHswmCyhr4qJ6LpHXCgKMYPpjK9L
+    expire_length_access: 1800000
+    expire_length_refresh: 1209600000
+
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/e-commerce
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        # show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100 # 왠만하면 얘를 키자.
+
+logging.level:
+  org.hibernate.SQL: debug
+# org.hibernate.type: trace

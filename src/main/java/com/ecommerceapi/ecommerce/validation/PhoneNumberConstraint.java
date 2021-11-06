@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME) // 2
 @Constraint(validatedBy = PhoneNumberValidator.class) // 3
 public @interface PhoneNumberConstraint {
-    String message() default "제대로 된 전화번호인지 검증합니다."; // 4
+    String message() default "잘못된 전화번호 형식입니다."; // 4
     Class[] groups() default {};
     Class[] payload() default {};
 }

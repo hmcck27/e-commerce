@@ -1,0 +1,18 @@
+package com.ecommerceapi.ecommerce.exception.exception;
+
+
+import com.ecommerceapi.ecommerce.exception.ErrorCode;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value=HttpStatus.UNAUTHORIZED, reason="NOT_VALID_ACCESS_TOKEN")
+public class NotValidAccessTokenException extends AllException{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public NotValidAccessTokenException() {
+		super(ErrorCode.NOT_VALID_ACCESS_TOKEN);
+	}
+}

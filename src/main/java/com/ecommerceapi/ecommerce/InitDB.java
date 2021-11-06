@@ -11,22 +11,22 @@ import javax.persistence.EntityManager;
 @RequiredArgsConstructor
 public class InitDB {
 
-    private final InitService initService;
+//    private final InitService initService;
 
-    @PostConstruct
-    public void init() {
-        initService.init1();
-        initService.init2();
-    }
-
-    @Component
-    @Transactional
-    @RequiredArgsConstructor
-    static class InitService {
-
-        private EntityManager em;
-
-
-    }
+//    @PostConstruct
+//    public void init() {
+//        initService.init1();
+//        initService.init2();
+//    }
+//
+//    @Component
+//    @Transactional
+//    @RequiredArgsConstructor
+//    static class InitService {
+//
+//        private EntityManager em;
+//
+//
+//    }
 
 }
