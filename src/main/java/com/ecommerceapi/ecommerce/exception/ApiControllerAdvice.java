@@ -1,5 +1,7 @@
 package com.ecommerceapi.ecommerce.exception;
 
+import com.ecommerceapi.ecommerce.exception.exception.AllException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,11 +16,32 @@ import java.util.Map;
 public class ApiControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex){
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
+
         ex.getBindingResult().getAllErrors()
                 .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
-        return ResponseEntity.badRequest().body(errors);
+
+        final ErrorResponse response = ErrorResponse
+                .create()
+                .status(ErrorCode.BAD_REQUEST.getStatus())
+                .code(ErrorCode.BAD_REQUEST.getCode())
+                .validations(
+                        errors);
+
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ErrorCode.BAD_REQUEST.getStatus()));
     }
 
+    @ExceptionHandler(AllException.class)
+    protected ResponseEntity<ErrorResponse> handleBusinessException(AllException e) {
+
+        final ErrorCode errorCode = e.getErrorCode();
+        final ErrorResponse response = ErrorResponse
+                .create()
+                .status(errorCode.getStatus())
+                .code(errorCode.getCode())
+                .message(errorCode.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
+    }
 }
